@@ -1,0 +1,50 @@
+
+#
+###
+####------------------DROP TABLE----------------
+###
+##
+#
+
+drop table `pages`;
+drop table `page_access`;
+
+
+#
+##
+###
+####-----------------CREATE TABLE---------------
+###
+##
+#
+
+create table `pages` (
+`page_id` INT(6)  AUTO_INCREMENT PRIMARY KEY,
+`page_name` VARCHAR(20) NOT NULL,
+`page_location` VARCHAR(255) NOT NULL,
+`page_title` VARCHAR(20) NOT NULL,
+`page_access` INT(6),
+  FOREIGN KEY (`page_access`)
+      REFERENCES `page_access`(access_id)
+      ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+
+CREATE TABLE `page_access` (
+`access_id` INT( 5 ) NOT NULL ,
+`access_name` VARCHAR( 255 ) NOT NULL );
+
+
+
+#
+##
+###
+####----------------INSERT INTO TABLE---------
+###
+##
+#
+INSERT INTO `gangit`.`page_access` (`access_id`, `access_name`) VALUES ('0', 'not_registred');
+INSERT INTO `gangit`.`page_access` (`access_id` ,`access_name`) VALUES ('1', 'registred_users');
+INSERT INTO `gangit`.`page_access` (`access_id`, `access_name`) VALUES ('2', 'admin');
+
+INSERT INTO pages (page_id, page_name, page_location, page_title, page_access)VALUES(1, 'News module', 'modules/news/news_index.php','News',4);
