@@ -2,7 +2,7 @@
 
 /**
  * Created by PhpStorm.
- * User: Lukas Dockal
+ * User: owner
  * Date: 12.2.2016
  * Time: 21:17
  */
