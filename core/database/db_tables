@@ -47,4 +47,4 @@ INSERT INTO `gangit`.`page_access` (`access_id`, `access_name`) VALUES ('0', 'no
 INSERT INTO `gangit`.`page_access` (`access_id` ,`access_name`) VALUES ('1', 'registred_users');
 INSERT INTO `gangit`.`page_access` (`access_id`, `access_name`) VALUES ('2', 'admin');
 
-INSERT INTO pages (page_id, page_name, page_location, page_title, page_access)VALUES(1, 'News module', 'modules/news/news_index.php','News',4);
+INSERT INTO pages (page_id, page_name, page_location, page_title, page_access)VALUES(1, 'News module', 'modules/news/news_index.php','News',0);
