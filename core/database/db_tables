@@ -2,21 +2,19 @@
 #
 ###
 ####------------------DROP TABLE----------------
-###
-##
-#
 
 drop table `pages`;
 drop table `page_access`;
-
+drop table `character_race`;
+drop table `character_class`;
+drop table `guilds`;
+drop table `user_character`;
+drop table `users`;
 
 #
 ##
 ###
 ####-----------------CREATE TABLE---------------
-###
-##
-#
 
 create table `pages` (
 `page_id` INT(6)  AUTO_INCREMENT PRIMARY KEY,
@@ -29,22 +27,92 @@ create table `pages` (
       ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-
-CREATE TABLE `page_access` (
+create table `page_access` (
 `access_id` INT( 5 ) NOT NULL ,
 `access_name` VARCHAR( 255 ) NOT NULL );
 
+create table `character_race` (
+`race_id` INT(2)  AUTO_INCREMENT PRIMARY KEY,
+`race_name` VARCHAR(20) NOT NULL);
+
+create table `character_class` (
+`class_id` INT(2)  AUTO_INCREMENT PRIMARY KEY,
+`class_name` VARCHAR(20) NOT NULL);
+
+create table `guilds` (
+`guild_id` INT(6)  AUTO_INCREMENT PRIMARY KEY,
+`guild_name` VARCHAR(50) NOT NULL UNIQUE,
+`guild_tag` VARCHAR(20) NOT NULL UNIQUE,
+`guild_leader` VARCHAR(20) NOT NULL,
+`guild_subleader` VARCHAR(20),
+`guild_pk` INT(1),
+`guild_active` INT(1));
+
+create table `user_character` (
+`character_id` INT(6)  AUTO_INCREMENT PRIMARY KEY,
+`character_name` VARCHAR(40) NOT NULL UNIQUE,
+`character_active` INT(1),
+`class_id` INT(6),
+`race_id` INT(6),
+`user_id` INT(6),
+  FOREIGN KEY (`class_id`) REFERENCES `character_class`(class_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+FOREIGN KEY (`race_id`) REFERENCES `character_race`(race_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+FOREIGN KEY (`user_id`) REFERENCES `users`(user_id) ON UPDATE CASCADE ON DELETE RESTRICT);
+
+create table `users` (
+`user_id` INT(6)  AUTO_INCREMENT PRIMARY KEY,
+`user_nick` VARCHAR(20) NOT NULL UNIQUE,
+`user_login` VARCHAR(20) NOT NULL UNIQUE,
+`user_password` VARCHAR(20) NOT NULL,
+`user_email` VARCHAR(30) NOT NULL UNIQUE,
+`guild_id` INT(6),
+`user_status_id` INT(6),
+`access_id` INT(6),
+  FOREIGN KEY (`guild_id`) REFERENCES `guilds`(guild_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+FOREIGN KEY (`access_id`) REFERENCES `page_access`(access_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+FOREIGN KEY (`user_status_id`) REFERENCES `user_status`(user_status_id) ON UPDATE CASCADE ON DELETE RESTRICT);
+
+create table `news_type` (
+`news_type_id` int(6) Auto_INCREMENT PRIMARY key unique,
+`news_type_name` VARCHAR(20)NOT NULL);
+
+create table `modul_news` (
+`news_id` INT(6)  AUTO_INCREMENT PRIMARY KEY,
+`news_title` VARCHAR(20) NOT NULL,
+`news_body` VARCHAR(20) NOT NULL,
+`news_date` TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+`news_type_id` int(6) not null,
+`user_id` INT(6) not null,
+  FOREIGN KEY (`news_type_id`) REFERENCES `news_type`(news_type_id) ON UPDATE CASCADE ON DELETE RESTRICT,
+FOREIGN KEY (`user_id`) REFERENCES `users`(user_id) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+create table user_status(
+user_status_id INT(6) auto_increment primary key,
+user_status_name varchar(20) not null
+ );
+
+#
+##
+###
+####----------------ALTER TABLE---------
 
 
 #
 ##
 ###
 ####----------------INSERT INTO TABLE---------
-###
-##
-#
+
 INSERT INTO `gangit`.`page_access` (`access_id`, `access_name`) VALUES ('0', 'not_registred');
 INSERT INTO `gangit`.`page_access` (`access_id` ,`access_name`) VALUES ('1', 'registred_users');
 INSERT INTO `gangit`.`page_access` (`access_id`, `access_name`) VALUES ('2', 'admin');
 
+insert into user_status(user_status_id, user_status_name) value(0, 'registred');
+insert into user_status(user_status_id, user_status_name) value(1, 'active');
+insert into user_status(user_status_id, user_status_name) value(2, 'banned');
+
 INSERT INTO pages (page_id, page_name, page_location, page_title, page_access)VALUES(1, 'News module', 'modules/news/news_index.php','News',0);
+
+INSERT INTO users (user_nick, user_login, user_password, user_email)VALUES('Lego','lokky007','pajinka007','lokishek007@seznam.cz');
+
+INSERT INTO modul_news(news_title, news_body,news_date, news_type_id, user_id) VALUES('Prvni novinka', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum est sed posuere gravida. Nunc viverra ante eros, quis commodo neque pretium non. Sed vel dapibus enim. Aenean malesuada quis diam sed efficitur. Aliquam tincidunt odio vitae quam suscipit, id congue eros commodo. Vivamus euismod ultrices tortor, a congue lorem convallis non. Nulla facilisi. Suspendisse venenatis facilisis libero, sit amet semper turpis finibus et. Quisque tincidunt mattis neque, nec commodo lacus ultricies vel. Vestibulum malesuada pharetra est non porta.',now(),1,1)

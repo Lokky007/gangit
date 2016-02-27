@@ -8,5 +8,19 @@
  */
 class page_access
 {
+    public static function returnPageAccess(){
+
+        $html=re::prepareSqlQuery() >prepareSqlQuery();
+        return $html;
+            }
+
+
+
+        private function prepareSqlQuery(){
+        $sql = 'select page_title, page_location, page_access from `pages` WHERE `page_id` = ' . $page_id;
+        $sql_result = db_connect::connect($sql);
+        $result = $sql_result->fetch_assoc();
+
+    }
 
 }

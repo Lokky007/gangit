@@ -10,6 +10,7 @@ include_once('configuration.php');
 include_once( path.'core/database/db_connect.php' );
 
 if(empty($_SESSION['id_user'])){$_SESSION['id_user'] = 0;};
+if(empty($_SESSION['access_service'])){$_SESSION['access_service'] = '';};
 if(empty($_POST['access_service'])){$_POST['access_service'] = '';};
 
 //If page in Url is not set, redirect to main page (page_id = 1)
@@ -53,25 +54,31 @@ else {
                           <div class=\"container-fluid service_align-middle\">
 
                             <div class='web_status'>
-                                <img src=\"" . path . "core/images/service.jpg\" alt=\"Service\" >
+                                <img src=\"" . path . "core/images/service_image.jpg\" alt=\"Service\" >
                             </div>
-                         <form class='hidden_access_input' method=\"post\">
-                         Access: <input name='access_service' type='password'>
-                          <input type=\"submit\" value=\"Submit\">
-                        </form>
-                        </div>
+                                 <form class='hidden_access_input' method=\"post\">
+                                 Access: <input name='access_service' type='password'>
+                                         <input type=\"submit\" value=\"Submit\">
+                                </form>
+                           </div>
                       </div>
                 ";
             }
 
         else {
+            //predelat do statiku a kontrolovat spravne udaje
             $sql =  'select page_title, page_location, page_access from `pages` WHERE `page_id` = ' . $page_id;
             $sql_result = db_connect::connect($sql);
             $result=$sql_result->fetch_assoc();
 
             //try access
-            if (($result['page_access'] == $_SESSION['id_user'])) {
-                echo 'je to ok';
+            //if user access number is < or = page_access, access is agree
+
+            if($result['page_access']  <= $_SESSION['id_user']){
+                include_once($result['page_location']);
+            }
+            else{
+                die('access denited');
             }
 
             return $result;
