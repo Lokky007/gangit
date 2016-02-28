@@ -55,13 +55,13 @@
                     <a href="#">Crafting</a>
                 </li>
                 <li>
-                    <a href="#">Quests</a>
+                    <a href="#">Questy</a>
                 </li>
                 <li>
-                    <a href="#">Map</a>
+                    <a href="#">Mapa</a>
                 </li>
                 <li>
-                    <a href="#">Broad</a>
+                    <a href="#">Vývěska</a>
                 </li>
                 <li>
                     <a href="#"></a>
@@ -77,18 +77,11 @@
                 if (!empty($_SESSION['id_user']) and (!empty($_SESSION['nick']))){
 
                     echo '<li><div class="success_login_message"> Welcome <a href="#">'.($_SESSION['nick']).'</a></div></li>';
-                    echo '<form action="" class="navbar-form navbar-right" role="form" >
-                                <button type="submit" class="btn btn-default" name="logOut_button" value="LogOut">Log Out</button>
+
+                    echo '<form action="index.php?page_id=1" method="get" class="navbar-form navbar-right" role="form">
+                                <button type="submit" class="btn btn-default" name="logOut" value="logout">Log Out</button>
                                 </form>';
 
-                    if (!isset($_GET['logOut_button'])){
-                        $_GET['logOut_button']='';
-                    }
-
-                    if($_GET['logOut_button']=='LogOut'){
-                        session_destroy();
-                        header('Location: index.php?page_id=1');
-                    }
 
                 }
 

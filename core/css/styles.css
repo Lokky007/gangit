@@ -1,5 +1,6 @@
-.xdebug-error{
-    margin-top: 100px;
+.xdebug-error,
+.xdebug-var-dump{
+    margin-top: 50px;
 }
 
 .web_status{

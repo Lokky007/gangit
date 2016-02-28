@@ -8,10 +8,20 @@
 
 include_once('configuration.php');
 include_once( path.'core/database/db_connect.php' );
+include_once (path.'core/controlers/page_access_controler.php');
+
 
 if(empty($_SESSION['id_user'])){$_SESSION['id_user'] = 0;};
+if(empty($_SESSION['nick'])){$_SESSION['nick'] = "";};
 if(empty($_SESSION['access_service'])){$_SESSION['access_service'] = '';};
+
 if(empty($_POST['access_service'])){$_POST['access_service'] = '';};
+
+if (isset($_GET['logOut'])=='logout'){
+    session_unset();
+}
+
+
 
 //If page in Url is not set, redirect to main page (page_id = 1)
 if (!isset($_GET['page_id'])){
@@ -66,22 +76,10 @@ else {
             }
 
         else {
-            //predelat do statiku a kontrolovat spravne udaje
-            $sql =  'select page_title, page_location, page_access from `pages` WHERE `page_id` = ' . $page_id;
-            $sql_result = db_connect::connect($sql);
-            $result=$sql_result->fetch_assoc();
 
             //try access
             //if user access number is < or = page_access, access is agree
-
-            if($result['page_access']  <= $_SESSION['id_user']){
-                include_once($result['page_location']);
-            }
-            else{
-                die('access denited');
-            }
-
-            return $result;
+            page_access_controler::page_access($page_id, $_SESSION['id_user'], $_SESSION['nick']);
         }
 
     }

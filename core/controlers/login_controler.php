@@ -6,6 +6,8 @@
  * Date: 21.2.2016
  * Time: 14:38
  */
+include_once(path.'core/database/db_login_controler.php');
+
 class login_controler {
 
     public static function check_login_parameters(){
@@ -24,7 +26,7 @@ class login_controler {
                 $session_data[1] = $db_data['user_nick'];
                 $session_data[2] = $db_data['user_password'];
 
-                login_controler::set_user_session($session_data[0],$session_data[1],$session_data[2]);
+                login_controler::set_user_session($session_data[0],$session_data[1]);
 
                 $result = TRUE;
             }
@@ -34,7 +36,7 @@ class login_controler {
 
 
     //set session
-    private static function set_user_session($id_user, $nick, $pass){
+    private static function set_user_session($id_user, $nick){
 
         $_SESSION['id_user'] = $id_user;
         $_SESSION['nick'] = $nick;
