@@ -10,9 +10,9 @@ class db_news extends db_connect
 {
     public static function prepareNews()
     {
-        $sql = "SELECT news_id, news_title, news_body,news_date, news_type_id, user_nick FROM `modul_news`
-                INNER JOIN `users` ON users.user_id = modul_news.user_id
-                ORDER BY `news_date` ;;
+        $sql = "SELECT news_id, news_title, news_body,news_date, news_type_id, user_nick FROM `news`
+                INNER JOIN `users` ON users.user_id = news.user_id
+                ORDER BY `news_date` DESC LIMIT 15;
                 ";
 
         $result = db_connect::connect($sql);

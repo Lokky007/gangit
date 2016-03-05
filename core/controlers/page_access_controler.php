@@ -16,7 +16,7 @@ class page_access_controler
         $access = new db_page_access_controler();
         $pages = $access->compareUserAndAccessRights($page_id, $id_user, $nick);
 
-        if ($pages) {
+        if ($pages and $page_id < 1001) {
             $page = $access->loadPageLocation($page_id);
             include_once(path.$page['page_location']);
             return;

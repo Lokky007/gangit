@@ -76,7 +76,7 @@ create table `news_type` (
 `news_type_id` int(6) Auto_INCREMENT PRIMARY key unique,
 `news_type_name` VARCHAR(20)NOT NULL);
 
-create table `modul_news` (
+create table `news` (
 `news_id` INT(6)  AUTO_INCREMENT PRIMARY KEY,
 `news_title` VARCHAR(20) NOT NULL,
 `news_body` VARCHAR(20) NOT NULL,
@@ -113,8 +113,12 @@ insert into user_status(user_status_id, user_status_name) value(2, 'banned');
 
 INSERT INTO pages (page_id, page_name, page_location, page_title, page_access)VALUES(1, 'News module', 'modules/news/news_index.php','News',0);
 INSERT INTO pages (page_id, page_name, page_location, page_title, page_access)VALUES(1000, 'Admin modul', 'modules/admin/admin_index.php','Admin',2);
+INSERT INTO pages (page_id, page_name, page_location, page_title, page_access)VALUES(1001, 'Admin-News modul', 'modules/admin/news/admin_news.php','Admin-News modul',2);
 
-INSERT INTO users (user_nick, user_login, user_password, user_email)VALUES('Lego','lokky007','pajinka007','lokishek007@seznam.cz');
+INSERT INTO users (user_nick, user_login, user_password, user_email)VALUES('Lego','lokky007','pajinka007','lokishek007@seznam.cz',1,2);
 INSERT INTO users (user_nick, user_login, user_password, user_email,user_status_id, access_id)VALUES('User','user','user','user@seznam.cz',1,1);
 
-INSERT INTO modul_news(news_title, news_body,news_date, news_type_id, user_id) VALUES('Prvni novinka', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum est sed posuere gravida. Nunc viverra ante eros, quis commodo neque pretium non. Sed vel dapibus enim. Aenean malesuada quis diam sed efficitur. Aliquam tincidunt odio vitae quam suscipit, id congue eros commodo. Vivamus euismod ultrices tortor, a congue lorem convallis non. Nulla facilisi. Suspendisse venenatis facilisis libero, sit amet semper turpis finibus et. Quisque tincidunt mattis neque, nec commodo lacus ultricies vel. Vestibulum malesuada pharetra est non porta.',now(),1,1)
+insert into news_type(news_typ_id, news_type_name) value(1, 'Web novinka');
+insert into news_type(news_typ_id, news_type_name) value(2, 'Herní novinka');
+
+INSERT INTO news(news_title, news_body,news_date, news_type_id, user_id) VALUES('Prvni novinka', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum est sed posuere gravida. Nunc viverra ante eros, quis commodo neque pretium non. Sed vel dapibus enim. Aenean malesuada quis diam sed efficitur. Aliquam tincidunt odio vitae quam suscipit, id congue eros commodo. Vivamus euismod ultrices tortor, a congue lorem convallis non. Nulla facilisi. Suspendisse venenatis facilisis libero, sit amet semper turpis finibus et. Quisque tincidunt mattis neque, nec commodo lacus ultricies vel. Vestibulum malesuada pharetra est non porta.',now(),1,1)

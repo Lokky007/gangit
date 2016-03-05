@@ -22,7 +22,6 @@ class db_connect
         else {
             $result = $conn->query($sql);
         }
-
         return $result;
     }
 }
