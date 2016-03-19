@@ -61,7 +61,7 @@
                     <a href="#">Mapa</a>
                 </li>
                 <li>
-                    <a href="#">Vývěska</a>
+                    <a href="./index.php?page_id=10">Vývěska</a>
                 </li>
                 <li>
                     <a href="#"></a>

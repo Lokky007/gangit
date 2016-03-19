@@ -15,4 +15,13 @@ class db_login_controler extends db_connect
         $result = db_connect::connect($sql);
         return $result;
     }
+
+    public static function check_login_status($id_user, $nick){
+        $sql = "SELECT * FROM `users` WHERE `user_nick` = '$nick' and `user_id`= $id_user";
+
+        $result = db_connect::connect($sql);
+
+        return $result;
+    }
+
 }

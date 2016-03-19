@@ -29,6 +29,8 @@ require_once(path.'modules/news/db_news/db_news.php');
         echo "Zádné položky k zobrazení";
     }
     else {
+        echo"<div class='web_news_column_left'>";
+
         while ($row = $news->fetch_assoc()) {
 
             echo "<div class='items_under_infobar'>";
@@ -53,5 +55,14 @@ require_once(path.'modules/news/db_news/db_news.php');
                 $visible=false;
             }
         }
+
+        echo '</div>';
     }
+
+    //TOTO JE BLOK PRO PRAVY SLOUPEC. CSS neni nadefinovano, ale je otagovanoo
+/*
+    echo"<div class='web_news_column_right'>
+<div class='items_under_infobar'>asdasdasdasd</div>
+</div>";
+*/
     ?>

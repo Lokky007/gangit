@@ -18,10 +18,12 @@ body {
     background-color: black;
     background-image: url("../images/background_image.jpg");
     background-repeat: no-repeat;
-}
-body {
     color: whitesmoke;
     font-style: italic;
+}
+
+button{
+    color:black;
 }
 .main_body {
     padding-top: 50px;
@@ -61,6 +63,34 @@ body {
     font-size: 20px;
 }
 
+.board_new_post{
+    vertical-align: bottom;
+    display: inline-block;
+}
+
+.textarea_broad_new_topic{
+    color: black;
+}
+
+.board_rules{
+    float: right;
+    padding-left: 5px;
+    vertical-align: bottom;
+    display: inline-block;
+}
+.body_index{
+    background-color: black;
+    border: 5px none white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-left: 18%;
+    margin-right: 18%;
+    opacity: 0.6;
+    padding: 10px;
+    width: 50%;
+}
+
+
 .news_insert_failed{
     color: red;
     padding-top: 20px;
@@ -97,7 +127,18 @@ body {
     margin-right: 18%;
     opacity: 0.6;
     padding: 10px;
+    width: 25%
 }
+/*
+.web_news_column_left{
+    float:left;
+}
+*/
+.web_news_column_right{
+    float: left;
+
+}
+
 .info_bar_module > .text {
     color: whitesmoke;
     opacity: 1;
