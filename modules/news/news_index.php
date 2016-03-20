@@ -31,29 +31,29 @@ require_once(path.'modules/news/db_news/db_news.php');
     else {
         echo"<div class='web_news_column_left'>";
 
-        while ($row = $news->fetch_assoc()) {
+            while ($row = $news->fetch_assoc()) {
 
-            echo "<div class='items_under_infobar'>";
-            echo " <div id=\"" . $row['news_id'] . "\"><h4>" . $row['news_title'] . "</h4></div>
-                    <div class=\"invisible_" . $row['news_id'] . "\" style=\"display: $display;\">
-                    Detail: <br>" .
-                            $row['news_body'] . "<br><br>Autor questu: " . $row['user_nick']
-                            . "<br></div>
+                echo "<div class='items_under_infobar'>";
+                echo " <div id=\"" . $row['news_id'] . "\"><h4>" . $row['news_title'] . "</h4></div>
+                        <div class=\"invisible_" . $row['news_id'] . "\" style=\"display: $display;\">
+                        Detail: <br>" .
+                                $row['news_body'] . "<br><br>Autor questu: " . $row['user_nick']
+                                . "<br></div>
 
-                        <script>
-                            $(document).ready(function() {
-                                $('#" . $row['news_id'] . "').click(function() {
-                                    $('.invisible_" . $row['news_id'] . "').slideToggle(\"fast\");
+                            <script>
+                                $(document).ready(function() {
+                                    $('#" . $row['news_id'] . "').click(function() {
+                                        $('.invisible_" . $row['news_id'] . "').slideToggle(\"fast\");
+                                    });
                                 });
-                            });
-                        </script>";
-            echo '</div>';
+                            </script>";
+                echo '</div>';
 
-            //visible first new and invis other
-            if ($visible){
-                $display='none';
-                $visible=false;
-            }
+                //visible first new and invis other
+                if ($visible){
+                    $display='none';
+                    $visible=false;
+                }
         }
 
         echo '</div>';

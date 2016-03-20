@@ -68,6 +68,10 @@ button{
     display: inline-block;
 }
 
+.body_index .hidden{
+    display: none;
+}
+
 .textarea_broad_new_topic{
     color: black;
 }
@@ -118,6 +122,25 @@ button{
     opacity: 0.6;
     padding: 10px;
 }
+
+.board_posts{
+    background-color: black;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin: 10px 18% 10px;
+    opacity: 0.6;
+    padding: 5px;
+}
+
+.board_filter_bar{
+    background-color: black;
+    border: 1px double silver;
+    border-radius: 5px;
+    margin: 10px 18% 10px;
+    opacity: 0.9;
+    padding: 5px;
+}
+
 .items_under_infobar {
     background-color: black;
     border: 5px none white;
