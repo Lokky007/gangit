@@ -49,6 +49,21 @@ require_once(path.'modules/board/class_board/board_load_post.php');
 <!--Filters-->
         <div class="board_filter_bar">
             <button class="btn btn-default button_dehide">Přidat inzerci</button>
+                <div class="board_filter_option">
+                            <b> Aktivovat filtry:    </b>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox1" value="option1"> Prodám/koupím
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox2" value="option2"> Spam
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox3" value="option3"> Od poslední návštěvy
+                            </label>
+                            <label class="checkbox-inline">
+                                <?php echo board_new_post::writePostIntoDb() ?>
+                            </label>
+            </div>
         </div>
 
 

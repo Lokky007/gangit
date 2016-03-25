@@ -95,8 +95,9 @@ user_status_name varchar(20) not null
  create table `board` (
  `board_id` INT(6)  AUTO_INCREMENT PRIMARY KEY,
  `board_parent_id` INT(6) default 0,
- `board_text` VARCHAR(20) NOT NULL,
+ `board_text` VARCHAR(500) NOT NULL,
  `board_date` datetime NOT NULL,
+ `board_post_type` INT(6) default 0,
  `user_id` INT(6),
    FOREIGN KEY (`user_id`) REFERENCES `users`(user_id)
        ON UPDATE CASCADE ON DELETE RESTRICT

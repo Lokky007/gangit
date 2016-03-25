@@ -18,7 +18,7 @@ class board_load_post extends db_board
 
         while ($row = $sql_result->fetch_assoc()) {
                 $html .= '<div class="board_posts">';
-                $html .= $row['board_text'] . "Id:" . $row['board_id'] . 'Autor:'. $row['board_usersPost'];
+                $html .= $row['board_post_type'] . $row['board_text'] . "Id:" . $row['board_id'] . 'Autor:'. $row['board_usersPost'];
                 $html .= '</div>';
 
         }

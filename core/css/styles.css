@@ -141,6 +141,11 @@ button{
     padding: 5px;
 }
 
+.board_filter_option{
+    display: inline-block;
+    padding-left: 10px;
+}
+
 .items_under_infobar {
     background-color: black;
     border: 5px none white;

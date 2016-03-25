@@ -8,6 +8,7 @@
  */
 class board_new_post
 {
+
     public static function prepareItemsForNewPost(){
         $status = board_new_post::checkLoginStatus();
 
@@ -16,10 +17,9 @@ class board_new_post
 
 
         if ($status->num_rows == 1){
-            echo '<form action="" method="POST"  role="form" class="board_new_post">
-                    <textarea rows="8" cols="90" class="form-control textarea_broad_new_topic"
-                    placeholder="Části pro nákup a prodej otagujte pomocí tlačítek umístěných vedle tohoto okna.Tagy slouží pro oddělejí spamu.
-                    Lze je vkládat i manuálně."></textarea> <br>
+            echo '<form action="" method="POST"  role="form" class="board_new_post" >
+                    <textarea name="board_post" rows="8" cols="90" class="form-control textarea_broad_new_topic"
+                    placeholder="Části pro nákup a prodej otagujte pomocí tlačítek umístěných vedle tohoto okna.Tagy slouží pro oddělejí spamu. Lze je vkládat i manuálně."></textarea> <br>
                     <button type="submit" class="btn btn-default" name="odeslat" value="odeslat">Odeslat</button>
                   </form>';
         }
@@ -39,5 +39,65 @@ class board_new_post
 
         return $status;
     }
+
+
+    /*
+     * FUNCTION
+     * method is situated in form of POSTFORM in prepareItemsForNewPost function.
+     * It take textarea and conver it to UpperCases for searhch of defined word
+     * In html is javascript that check same rules and visualise it to the user
+     */
+    public static function writePostIntoDb(){
+
+        $userId = $_SESSION['id_user'];
+
+        if(isset($_POST['odeslat'])) {
+
+            $contentPost = $_POST['board_post'];
+
+            if ($contentPost == '') {
+                $message = 'Nelze odeslat prázdnou inzerci';
+            }
+            else {
+
+                //set all letters lower and found tags
+                $upperContentPost = mb_convert_case($contentPost, MB_CASE_UPPER, "UTF-8");
+                //recognize spam and demand/supply
+
+                $typePost = board_new_post::setTypeOfPost($upperContentPost);
+                if ($typePost == True) {
+                    //for demand/supp
+                    $typeNum = 1;
+                } else {
+                    //form spam post;
+                    $typeNum = 2;
+                }
+                var_dump($typeNum);
+                db_board::writePostIntoDb($contentPost, $userId, $typeNum);
+                 $message = 'Zapsání proběhlo uspěšně';
+
+            }
+            return $message;
+        }
+    }
+
+    public static function setTypeOfPost($upperContentPost)
+    {
+
+        if (board_new_post::startsWith($upperContentPost, 'SELL') OR board_new_post::startsWith($upperContentPost, 'BUY') OR
+            board_new_post::startsWith($upperContentPost, 'PRODÁM') OR board_new_post::startsWith($upperContentPost, 'KOUPÍM') OR
+            board_new_post::startsWith($upperContentPost, 'PRODAM') OR board_new_post::startsWith($upperContentPost, 'KOUPIM')) {
+            return True;
+        }
+
+        return false;
+
+    }
+
+    public static function startsWith($haystack, $needle) {
+        // search backwards starting from haystack length characters from the end
+        return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== false;
+    }
+
 
 }

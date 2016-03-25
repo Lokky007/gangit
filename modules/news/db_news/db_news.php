@@ -16,6 +16,7 @@ class db_news extends db_connect
                 ";
 
         $result = db_connect::connect($sql);
+
         return $result;
     }
 }
