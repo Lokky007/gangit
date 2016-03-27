@@ -24,7 +24,7 @@ class db_board extends db_connect
 
 
     public static function writePostIntoDb($content, $userId, $typeNum){
-        var_dump($typeNum);
+
         $sql = "INSERT INTO board(`board_text`,`board_date`,`board_post_type`, `user_id`) values ('$content', now(), $typeNum , $userId);";
 
         $result = db_connect::connect($sql);

@@ -216,3 +216,17 @@ button{
     margin-top:  5px;
     color:black;
 }
+.new_post_insert_success{
+    padding-left: 8px;
+    padding-right: 8px;
+    border: 2px solid greenyellow;
+    border-radius: 5px;
+}
+.new_post_insert_fail{
+    padding-left: 8px;
+    padding-right: 8px;
+    border: 2px solid red;
+    border-radius: 5px;
+}
+
+

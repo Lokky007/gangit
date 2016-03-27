@@ -43,7 +43,7 @@ require_once(path.'modules/news/db_news/db_news.php');
                             <script>
                                 $(document).ready(function() {
                                     $('#" . $row['news_id'] . "').click(function() {
-                                        $('.invisible_" . $row['news_id'] . "').slideToggle(\"fast\");
+                                            $('.invisible_" . $row['news_id'] . "').slideToggle(\"fast\");
                                     });
                                 });
                             </script>";

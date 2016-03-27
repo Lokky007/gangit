@@ -52,10 +52,10 @@ require_once(path.'modules/board/class_board/board_load_post.php');
                 <div class="board_filter_option">
                             <b> Aktivovat filtry:    </b>
                             <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox1" value="option1"> Prodám/koupím
+                                <input type="checkbox" id="inlineCheckbox1" value="option1" onclick="jQuery('.post_type_1').toggle('slow','swing');"> Prodám/koupím
                             </label>
                             <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox2" value="option2"> Spam
+                                <input type="checkbox" id="inlineCheckbox2" value="option2" onclick="jQuery('.post_type_2').toggle('slow','swing');"> Spam
                             </label>
                             <label class="checkbox-inline">
                                 <input type="checkbox" id="inlineCheckbox3" value="option3"> Od poslední návštěvy

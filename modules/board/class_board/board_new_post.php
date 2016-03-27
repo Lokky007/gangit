@@ -56,7 +56,7 @@ class board_new_post
             $contentPost = $_POST['board_post'];
 
             if ($contentPost == '') {
-                $message = 'Nelze odeslat prázdnou inzerci';
+                $message = '<div class="new_post_insert_fail" >Nelze odeslat prázdnou inzerci</div>';
             }
             else {
 
@@ -72,9 +72,9 @@ class board_new_post
                     //form spam post;
                     $typeNum = 2;
                 }
-                var_dump($typeNum);
+
                 db_board::writePostIntoDb($contentPost, $userId, $typeNum);
-                 $message = 'Zapsání proběhlo uspěšně';
+                 $message = '<div class="new_post_insert_success" >Zapsání proběhlo uspěšně</dvi>';
 
             }
             return $message;
