@@ -74,7 +74,7 @@ class board_new_post
                 }
 
                 db_board::writePostIntoDb($contentPost, $userId, $typeNum);
-                 $message = '<div class="new_post_insert_success" >Zapsání proběhlo uspěšně</dvi>';
+                 $message = '<div class="new_post_insert_success" >Zapsání proběhlo uspěšně</div>';
 
             }
             return $message;
@@ -97,6 +97,21 @@ class board_new_post
     public static function startsWith($haystack, $needle) {
         // search backwards starting from haystack length characters from the end
         return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== false;
+    }
+/*
+ * function for render comment form.
+ */
+    public static function prepareItemsForComment($id){
+
+            $form = '<form action="" method="POST" role="form" class="board_new_post" >
+                    <textarea name="board_comment" rows="4" cols="70" class="form-control textarea_broad_new_topic"
+                    placeholder="Zde vložte svůj komentář"></textarea> <br>
+                    <input type="hidden" name="id_post" value='.$id.'><br>
+                    <button type="submit" class="btn btn-default" name="send_comment" value="odeslat">Odeslat</button>
+                  </form>';
+
+        return $form;
+
     }
 
 

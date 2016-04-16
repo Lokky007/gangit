@@ -1,6 +1,7 @@
 <?php
 include(path.'core/templates/main_template.php');
 require_once(path.'modules/board/class_board/board_new_post.php');
+require_once(path.'modules/board/class_board/board_new_comment.php');
 require_once(path.'modules/board/class_board/board_load_post.php');
 ?>
 
@@ -41,7 +42,7 @@ require_once(path.'modules/board/class_board/board_load_post.php');
                 <ul>
                     <li>Žádné vulgarismy a napadání</li>
                     <li>Využívejte vytvořených tagů pro efektivnější filtraci</li>
-                    <li>Milk</li>
+                    <li>Pro zanechání komentáře klikněte na daný post</li>
                 </ul>
             </div>
         </div>
@@ -52,13 +53,16 @@ require_once(path.'modules/board/class_board/board_load_post.php');
                 <div class="board_filter_option">
                             <b> Aktivovat filtry:    </b>
                             <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox1" value="option1" onclick="jQuery('.post_type_1').toggle('slow','swing');"> Prodám/koupím
+                                <input type="checkbox" id="inlineCheckbox1" value="option1" onclick="jQuery('.post_type_1').toggle('slow');"> Prodám/koupím
                             </label>
                             <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox2" value="option2" onclick="jQuery('.post_type_2').toggle('slow','swing');"> Spam
+                                <input type="checkbox" id="inlineCheckbox2" value="option2" onclick="jQuery('.post_type_2').toggle('slow');"> Spam
                             </label>
                             <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox3" value="option3"> Od poslední návštěvy
+                                <input type="checkbox" id="inlineCheckbox3" value="option3"> Zobrazit komentaře
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox4" value="option4"> Od poslední návštěvy
                             </label>
                             <label class="checkbox-inline">
                                 <?php echo board_new_post::writePostIntoDb() ?>
@@ -70,5 +74,7 @@ require_once(path.'modules/board/class_board/board_load_post.php');
 <?php
 //print posts
 echo board_load_post::load_posts();
+//call function for write comment into db(if POST data)
+board_new_comment::writeCommentIntoDb();
 
 ?>

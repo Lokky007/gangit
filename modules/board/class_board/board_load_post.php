@@ -14,7 +14,10 @@ class board_load_post extends db_board
 
         $html='';
 
+        //sql_result mean load all post saved in db
         $sql_result = db_board::preparePostFromDb();
+        //$status mean if user is logged on or out;
+        $status = board_new_post::checkLoginStatus();
 
         while ($row = $sql_result->fetch_assoc()) {
                 //call function for connection of icon to view
@@ -23,16 +26,26 @@ class board_load_post extends db_board
                 //prepare html view for rendering post
                 $html .= '<div class="board_posts post_type_'.$row['board_post_type'].'">';
                 $html .= "<div id ='post_". $row['board_id']."'>" . $iconType . 'Autor:'. $row['board_usersPost'] . '<br>' . $row['board_text'] . "</div>";
-                $html .= '</div>';
-                $html .= "<script>
+
+                //if user is logged, return javascript with form for commment
+                if ($status->num_rows == 1){
+                    $html .= "<div class='' style='display:none;' id='invisible_reply_" . $row['board_id'] . "'> <hr>";
+                    $html .= board_new_post::prepareItemsForComment($row['board_id']);
+                    $html .= '</div></div>';
+
+
+                    $html .= "<script>
                             $(document).ready(function() {
                                 $('#post_" . $row['board_id'] . "').click(function() {
                                     $('#invisible_reply_" . $row['board_id'] . "').slideToggle(\"fast\");
                                                     });
                                                 });
                            </script>";
-            $html .= "<div class='' style='display:none;' id='invisible_reply_". $row['board_id']."'> abrakadabra</div>";
-
+                }
+                //else return end of div
+                else{
+                    $html .= "</div>";
+                }
         }
 
        return $html;
