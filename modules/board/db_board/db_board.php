@@ -23,6 +23,32 @@ class db_board extends db_connect
         return $result;
     }
 
+    public static function loadComment($parent_id){
+        $sql = "SELECT `board_id`,
+                        `board_parent_id`,
+                        `board_text`,
+                        `board_post_type`,
+                        `board_date`,
+                        `users`.`user_nick` as `board_usersComment`
+                FROM `board`
+                INNER JOIN `users` ON `board`. `user_id` = `users`.`user_id`
+                WHERE `board_parent_id`= $parent_id;";
+
+        $result = db_connect::connect($sql);
+
+        return $result;
+    }
+
+    public static function prepareCheckOfComment($post_id){
+        $sql = "SELECT `board`.`board_id`
+                FROM `board`
+                WHERE `board`.`board_parent_id` = $post_id and `board`.`board_parent_id` != 0;" ;
+
+        $result = db_connect::connect($sql);
+
+        return $result;
+    }
+
 
     public static function writePostIntoDb($content, $userId, $typeNum){
 

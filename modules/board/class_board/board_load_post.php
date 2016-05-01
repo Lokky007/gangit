@@ -7,31 +7,38 @@
  * Time: 0:04
  */
 include(path.'modules/board/db_board/db_board.php');
+include(path.'modules/board/class_board/board_load_comment.php');
 
 class board_load_post extends db_board
 {
+
     public static function load_posts(){
 
         $html='';
 
-        //sql_result mean load all post saved in db
-        $sql_result = db_board::preparePostFromDb();
-        //$status mean if user is logged on or out;
-        $status = board_new_post::checkLoginStatus();
+        //$sqlPreparePosts mean load all post saved in db
+        $sqlPreparePosts = db_board::preparePostFromDb();
 
-        while ($row = $sql_result->fetch_assoc()) {
-                //call function for connection of icon to view
+        //$status mean if user is logged on or off;
+        $sqlPrepareUserStatus = board_new_post::checkLoginStatus();
+
+
+        while ($row = $sqlPreparePosts->fetch_assoc()) {
+                //call function for connection of icon to head of post
                 $iconType = self::prepareIconForPostType($row['board_post_type'] );
 
                 //prepare html view for rendering post
                 $html .= '<div class="board_posts post_type_'.$row['board_post_type'].'">';
-                $html .= "<div id ='post_". $row['board_id']."'>" . $iconType . 'Autor:'. $row['board_usersPost'] . '<br>' . $row['board_text'] . "</div>";
+                $html .= "<div id ='post_". $row['board_id']."'>" . $iconType . ' Autor:'. $row['board_usersPost'] . '<br><b>' . $row['board_text'] . "</b></div>";
+
+                $isLogged = $sqlPrepareUserStatus->num_rows == 1;
 
                 //if user is logged, return javascript with form for commment
-                if ($status->num_rows == 1){
+                if ($isLogged){
                     $html .= "<div class='' style='display:none;' id='invisible_reply_" . $row['board_id'] . "'> <hr>";
                     $html .= board_new_post::prepareItemsForComment($row['board_id']);
-                    $html .= '</div></div>';
+                    $html .= '</div>';
+                    $html .= board_load_post::prepareComments($row['board_id'], $isLogged).'</div>';
 
 
                     $html .= "<script>
@@ -44,7 +51,7 @@ class board_load_post extends db_board
                 }
                 //else return end of div
                 else{
-                    $html .= "</div>";
+                    $html .= board_load_post::prepareComments($row['board_id'],$isLogged)."</div>";
                 }
         }
 
@@ -67,6 +74,60 @@ class board_load_post extends db_board
         //prepare all img link
         $imageLink = "<img src = $link>";
         return $imageLink;
+    }
+
+    public static function prepareComments($board_id, $isLogged){
+
+        $divComment='';
+        //$sqlCheckComments for check comment under specific post
+        $sqlCheckComments = db_board::prepareCheckOfComment($board_id);
+        $countOfComment = $sqlCheckComments->num_rows;
+
+        if ($countOfComment >= 1) {
+
+            //search comment
+            $comments = db_board::loadComment($board_id)->fetch_all();
+            $divComment = '<hr>';
+            foreach ($comments as $comment) {
+                $divComment .= '<div class="comment_under_post">';
+
+                if ($comment[1] != 0) {
+                    //render comment
+                    $divComment .= board_load_post::renderComment($comment[0], $comment[2], $comment[5], $comment[4], $isLogged);
+
+                    //check if comment is commented
+                    $divComment .= self::prepareComments($comment[0], $isLogged);
+
+                } else {
+                    //render comment
+                    $divComment .= board_load_post::renderComment($comment[0], $comment[2], $comment[5], $comment[4], $isLogged);
+                }
+                $divComment .= '</div>';
+            }
+        }
+        return $divComment;
+    }
+
+    public static function renderComment($id, $text, $user, $date, $isLogged){
+        $html='';
+        $html .= '<div class="comment">';
+        $html .= "<div id ='post_". $id."'>" .$date . 'Autor:'. $user . '<br><b>' . $text . "</b></div>";
+        $html .= '</div>';
+        //if user is logged, render div with form for comment
+        if ($isLogged) {
+            $html .= "<div class='' style='display:none;' id='invisible_reply_" . $id . "'>" . board_new_post::prepareItemsForComment($id) . '</div><hr>';
+            $html .= "<script>
+                            $(document).ready(function() {
+                                $('#post_" . $id . "').click(function() {
+                                    $('#invisible_reply_" . $id . "').slideToggle(\"fast\");
+                                                    });
+                                                });
+                           </script>";
+        }
+        else{
+            $html .= '<hr>';
+        }
+        return $html;
     }
 
 }

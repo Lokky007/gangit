@@ -59,7 +59,7 @@ require_once(path.'modules/board/class_board/board_load_post.php');
                                 <input type="checkbox" id="inlineCheckbox2" value="option2" onclick="jQuery('.post_type_2').toggle('slow');"> Spam
                             </label>
                             <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox3" value="option3"> Zobrazit komentaře
+                                <input type="checkbox" id="inlineCheckbox3" value="option3" onclick="jQuery('.comment_under_post').toggle('slow');"> Zobrazit komentaře
                             </label>
                             <label class="checkbox-inline">
                                 <input type="checkbox" id="inlineCheckbox4" value="option4"> Od poslední návštěvy

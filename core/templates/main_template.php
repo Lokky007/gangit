@@ -55,7 +55,7 @@
                     <a href="#">Crafting</a>
                 </li>
                 <li>
-                    <a href="#">Questy</a>
+                    <a href="./index.php?page_id=20">Questy</a>
                 </li>
                 <li>
                     <a href="#">Mapa</a>

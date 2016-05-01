@@ -74,6 +74,7 @@ class board_new_post
                 }
 
                 db_board::writePostIntoDb($contentPost, $userId, $typeNum);
+                header('Location: index.php?page_id=10');
                  $message = '<div class="new_post_insert_success" >Zapsání proběhlo uspěšně</div>';
 
             }
@@ -106,7 +107,7 @@ class board_new_post
             $form = '<form action="" method="POST" role="form" class="board_new_post" >
                     <textarea name="board_comment" rows="4" cols="70" class="form-control textarea_broad_new_topic"
                     placeholder="Zde vložte svůj komentář"></textarea> <br>
-                    <input type="hidden" name="id_post" value='.$id.'><br>
+                    <input type="hidden" name="id_post" value='.$id.'>
                     <button type="submit" class="btn btn-default" name="send_comment" value="odeslat">Odeslat</button>
                   </form>';
 

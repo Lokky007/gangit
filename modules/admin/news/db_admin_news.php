@@ -37,7 +37,7 @@ class db_admin_news extends db_connect
 
         }
         else{
-            echo "<div class='news_insert_failed'> Error- Jeden z údajů k zapsání je neplatný.";
+            echo "<div class='news_insert_failed'> Error- Jeden z údajů k zapsání je neplatný.<br>";
             echo "INSERT INTO news(news_title, news_type_id, news_body, user_id) VALUES ('$news_title', $news_type_id, '$news_body', (SELECT user_id FROM users where user_id = $id_user)</div>";
         }
         return;

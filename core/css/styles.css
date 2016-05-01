@@ -1,6 +1,7 @@
 
 .xdebug-error, .xdebug-var-dump {
     margin-top: 50px;
+    color:black;
 }
 .web_status {
     padding-left: 20%;
@@ -22,13 +23,26 @@ body {
     font-style: italic;
 }
 
+.footer {
+    opacity: 0.3;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    font-style: normal;
+    text-align: center;
+}
+
 button{
     color:black;
 }
 .main_body {
     padding-top: 50px;
 }
-#main_container_quests, #main_container_news {
+#main_container_quests,
+#main_container_news
+{
     background-color: black;
     border-radius: 5px;
     box-shadow: 0 0 65px black, 0 0 25px white;
@@ -123,7 +137,8 @@ button{
     padding: 10px;
 }
 
-.board_posts{
+.board_posts ,
+.questBlock{
     background-color: black;
     border: 1px solid white;
     border-radius: 5px;
@@ -227,6 +242,23 @@ button{
     padding-right: 8px;
     border: 2px solid red;
     border-radius: 5px;
+}
+.comment_under_post{
+    padding-left: 25px;
+}
+.questName{
+    float: left;
+}
+
+.questLevel{
+    padding-left: 220px;
+    float: left;
+}
+.questX,
+.questY{
+    padding-left: 20px;
+    padding-right: 40px;
+    float: right;
 }
 
 

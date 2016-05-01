@@ -85,3 +85,9 @@ else {
     }
 
 }
+?>
+<!-- footer
+<div class="footer">
+    <b>Created by <i>Lukáš Dočkal</i> © 2016</b>
+</div>
+-->
