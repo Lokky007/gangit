@@ -20,7 +20,7 @@ class board_load_post extends db_board
         $sqlPreparePosts = db_board::preparePostFromDb();
 
         //$status mean if user is logged on or off;
-        $sqlPrepareUserStatus = board_new_post::checkLoginStatus();
+        $isLogged = board_new_post::checkLoginStatus();
 
 
         while ($row = $sqlPreparePosts->fetch_assoc()) {
@@ -31,7 +31,7 @@ class board_load_post extends db_board
                 $html .= '<div class="board_posts post_type_'.$row['board_post_type'].'">';
                 $html .= "<div id ='post_". $row['board_id']."'>" . $iconType . ' Autor:'. $row['board_usersPost'] . '<br><b>' . $row['board_text'] . "</b></div>";
 
-                $isLogged = $sqlPrepareUserStatus->num_rows == 1;
+               // $isLogged = $sqlPrepareUserStatus->num_rows == 1;
 
                 //if user is logged, return javascript with form for commment
                 if ($isLogged){

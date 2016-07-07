@@ -16,7 +16,7 @@ class board_new_post
         //Else print text for login/attention
 
 
-        if ($status->num_rows == 1){
+        if ($status){
             echo '<form action="" method="POST"  role="form" class="board_new_post" >
                     <textarea name="board_post" rows="8" cols="90" class="form-control textarea_broad_new_topic"
                     placeholder="Části pro nákup a prodej otagujte pomocí tlačítek umístěných vedle tohoto okna.Tagy slouží pro oddělejí spamu. Lze je vkládat i manuálně."></textarea> <br>
@@ -32,12 +32,22 @@ class board_new_post
 
     public static function checkLoginStatus(){
 
-        $id_user = $_SESSION['id_user'];
-        $nick = $_SESSION['nick'];
+        $id_user= isset($_SESSION['id_user']) ? $_SESSION['id_user'] : "";
+        $nick= isset($_SESSION['nick'])? $_SESSION['nick']: "";
+        $session = isset($_SESSION['session'])?$_SESSION['session']: "";
 
-        $status = db_login_controler::check_login_status($id_user, $nick);
-
-        return $status;
+        if(empty($id_user) or empty($nick) or empty($session)) {
+            return false;
+        }
+        else{
+            $status = db_login_controler::check_login_status($id_user, $nick, $session);
+            if ($status->num_rows ==1) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
     }
 
 

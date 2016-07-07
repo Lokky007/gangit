@@ -20,13 +20,19 @@ class login_controler {
 
             //If data are correct and found 1 record, go set session for user
             if ($db_result->num_rows == 1) {
+
                 $db_data = $db_result->fetch_array();
 
                 $session_data[0] = $db_data['user_id'];
                 $session_data[1] = $db_data['user_nick'];
-                $session_data[2] = $db_data['user_password'];
 
-                login_controler::set_user_session($session_data[0],$session_data[1]);
+                //generate session
+                $sessionForStore = login_controler::generateSessionId();
+
+                login_controler::set_user_session($session_data[0],$session_data[1], $sessionForStore);
+
+                //generate and write new session into db
+                db_login_controler::write_sessionAfterLogin($db_data['user_id'], $db_data['user_nick'], $sessionForStore);
 
                 $result = TRUE;
             }
@@ -36,13 +42,41 @@ class login_controler {
 
 
     //set session
-    private static function set_user_session($id_user, $nick){
+    private static function set_user_session($id_user, $nick, $session){
 
         $_SESSION['id_user'] = $id_user;
         $_SESSION['nick'] = $nick;
-
+        $_SESSION['session'] = $session;
 
         return;
+    }
+
+    //if currently session user == session in database created when user was logged return TRUE
+    public static function check_session(){
+    return true;
+
+
+    }
+
+
+
+
+    /*
+     * Generate random session form string and numbers
+     * @param $lengthOfSession
+     */
+    public static function generateSessionId(){
+
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomSession = '';
+        $lengthOfSession=25;
+
+        for ($i = 0; $i < $lengthOfSession; $i++) {
+            $randomSession .= $characters[rand(0, $charactersLength - 1)];
+        }
+
+        return $randomSession;
     }
 
 

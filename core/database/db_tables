@@ -116,10 +116,24 @@ user_status_name varchar(20) not null
        ON UPDATE CASCADE ON DELETE RESTRICT
  );
 
+  create table `chat` (
+  `chat_messageId` INT(6)  AUTO_INCREMENT PRIMARY KEY,
+  `chat_messageContent` char(255),
+  `chat_messageTime` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `chat_messageAuthorId` INT(6) NOT NULL,
+    FOREIGN KEY (`chat_messageAuthorId`) REFERENCES `users`(user_id)
+        ON UPDATE CASCADE ON DELETE RESTRICT
+  );
+
+
 #
 ##
 ###
 ####----------------ALTER TABLE---------
+
+ALTER TABLE users ADD user_actualSession char(25);
+
+
 
 
 #

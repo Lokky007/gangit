@@ -16,8 +16,8 @@
 }
 body {
     background-attachment: fixed;
-    background-color: black;
-    background-image: url("../images/background_image.jpg");
+    /*background-color: black;
+    /*background-image: url("../images/background_image.jpg");*/
     background-repeat: no-repeat;
     color: whitesmoke;
     font-style: italic;
@@ -105,7 +105,6 @@ button{
     margin-right: 18%;
     opacity: 0.6;
     padding: 10px;
-    width: 50%;
 }
 
 
@@ -152,7 +151,7 @@ button{
     border: 1px double silver;
     border-radius: 5px;
     margin: 10px 18% 10px;
-    opacity: 0.9;
+    opacity: 0.6;
     padding: 5px;
 }
 
@@ -166,20 +165,30 @@ button{
     border: 5px none white;
     border-radius: 5px;
     margin-bottom: 10px;
-    margin-left: 18%;
-    margin-right: 18%;
+   /* margin-right: 18%;*/
     opacity: 0.6;
     padding: 10px;
-    width: 25%
 }
-/*
+
+.web_news{
+    background-color: red;
+    border: 5px none white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-left: 18%;
+    margin-right: 18%;
+
+}
+
 .web_news_column_left{
     float:left;
+    width: 70%;
 }
-*/
-.web_news_column_right{
-    float: left;
 
+.web_news_column_right{
+    float:left;
+    padding-left: 10px;
+    width: 30%;
 }
 
 .info_bar_module > .text {
@@ -248,6 +257,7 @@ button{
 }
 .questName{
     float: left;
+    width: 300px;
 }
 
 .questLevel{

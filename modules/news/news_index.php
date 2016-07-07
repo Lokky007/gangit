@@ -5,16 +5,7 @@ require_once(path.'modules/news/db_news/db_news.php');
 
 <div class='info_bar_module'>
     <div class='text'>
-        <b>
-            <p>
-                Tot bude hlavicka ktera popisuje zakladni definici modulu, Nezapomenout ji vyplnit.
-                Bude obsahovat ucel modulu a zpusob jak s nim pracovat.
-            </p>
-
-            <br/>
-            bla bla
-            <br />
-        </b>
+        <?php include path.'core/accessories/chatbox/chatBox_index.php';?>
     </div>
 </div>
 
@@ -29,15 +20,16 @@ require_once(path.'modules/news/db_news/db_news.php');
         echo "Zádné položky k zobrazení";
     }
     else {
-        echo"<div class='web_news_column_left'>";
+
+        echo"<div class='web_news'><div class='web_news_column_left'>";
 
             while ($row = $news->fetch_assoc()) {
 
                 echo "<div class='items_under_infobar'>";
-                echo " <div id=\"" . $row['news_id'] . "\"><h4>" . $row['news_title'] . "</h4></div>
+                echo " <div id=\"" . $row['news_id'] . "\"><div class='newsTitle'>" . $row['news_title'] . "</div></div>
                         <div class=\"invisible_" . $row['news_id'] . "\" style=\"display: $display;\">
-                        Detail: <br>" .
-                                $row['news_body'] . "<br><br>Autor questu: " . $row['user_nick']
+                        " .
+                                $row['news_body'] . "<br>Autor novinky: " . $row['user_nick']
                                 . "<br></div>
 
                             <script>
@@ -60,9 +52,9 @@ require_once(path.'modules/news/db_news/db_news.php');
     }
 
     //TOTO JE BLOK PRO PRAVY SLOUPEC. CSS neni nadefinovano, ale je otagovanoo
-/*
+
     echo"<div class='web_news_column_right'>
-<div class='items_under_infobar'>asdasdasdasd</div>
-</div>";
-*/
+             <div class='items_under_infobar'>Zde bude kalendar s akcemi guildy a GM akcemi</div>
+        </div></div>";
+
     ?>
