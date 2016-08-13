@@ -29,8 +29,9 @@ require_once(path.'modules/news/db_news/db_news.php');
                 echo " <div id=\"" . $row['news_id'] . "\"><div class='newsTitle'>" . $row['news_title'] . "</div></div>
                         <div class=\"invisible_" . $row['news_id'] . "\" style=\"display: $display;\">
                         " .
-                                $row['news_body'] . "<br>Autor novinky: " . $row['user_nick']
-                                . "<br></div>
+                                $row['news_body']
+                                . "<br>
+                                </div>
 
                             <script>
                                 $(document).ready(function() {

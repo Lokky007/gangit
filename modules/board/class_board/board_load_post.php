@@ -87,7 +87,7 @@ class board_load_post extends db_board
 
             //search comment
             $comments = db_board::loadComment($board_id)->fetch_all();
-            $divComment = '<hr>';
+            $divComment = '<hr> ';
             foreach ($comments as $comment) {
                 $divComment .= '<div class="comment_under_post">';
 
