@@ -23,6 +23,7 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<?php echo path.'core/js/bootstrap.min.js'?>"></script>
     <script src="<?php echo path.'core/js/chatbox.js'?>"></script>
+    <script src="<?php echo path.'core/js/mainScripts.js'?>"></script>
 
 
     <!--Import my files-->
@@ -39,7 +40,7 @@
 
 <body>
 
-<div class="navbar navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar navbar-inverse navbar-fixed-top opacity50" onmousemove="opacity100('opacity50')" onmouseout="opacity50('opacity50')">
     <div class="container">
         <div class="navbar-header">
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">

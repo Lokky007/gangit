@@ -43,4 +43,24 @@ class db_admin_news extends db_connect
         return;
     }
 
+    public static function insertNewGameEventsToDb($news_action_title, $news_action_body)
+    {
+        $id_user = $_SESSION['id_user'];
+
+        $sql = "INSERT INTO events(event_name, event_text, user_id) VALUES ('$news_action_title', '$news_action_body', (SELECT user_id FROM users where user_id = $id_user)) ";
+        $result=db_connect::connect($sql);
+
+        if($result){
+            echo "<div class='news_insert_successful'>Událost zapsána a zveřejněna</div>";
+
+        }
+        else{
+            echo "<div class='news_insert_failed'> Error- Jeden z údajů k zapsání je neplatný.<br>";
+            echo "INSERT INTO events(event_name, event_text, user_id) VALUES ('$news_action_title', '$news_action_body', (SELECT user_id FROM users where user_id = $id_user)) </div>";
+        }
+        return;
+    }
+
+
+
 }

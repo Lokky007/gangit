@@ -19,4 +19,19 @@ class db_news extends db_connect
 
         return $result;
     }
+
+    public static function prepareEvents()
+    {
+        $sql = "SELECT event_id, event_name, event_text FROM `events`
+                INNER JOIN `users` as us ON us.user_id = events.user_id
+                ORDER BY `event_date` DESC LIMIT 10;
+                ";
+
+        $result = db_connect::connect($sql);
+
+        return $result;
+
+    }
+
+
 }

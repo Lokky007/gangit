@@ -13,8 +13,10 @@ require_once(path.'modules/news/db_news/db_news.php');
     $news = db_news::prepareNews();
 
     //set params for visible and invis new
-    $visible = true;
-    $display = 'block';
+    $visible_news = true;
+    $visible_events = true;
+    $display_news = 'block';
+    $display_events = 'block';
 
     if (!$news){
         echo "Zádné položky k zobrazení";
@@ -26,8 +28,8 @@ require_once(path.'modules/news/db_news/db_news.php');
             while ($row = $news->fetch_assoc()) {
 
                 echo "<div class='items_under_infobar'>";
-                echo " <div id=\"" . $row['news_id'] . "\"><div class='newsTitle'>" . $row['news_title'] . "</div></div>
-                        <div class=\"invisible_" . $row['news_id'] . "\" style=\"display: $display;\">
+                echo " <div id=\"news" . $row['news_id'] . "\"><div class='newsTitle'>" . $row['news_title'] . "</div></div>
+                        <div class=\"invisible_news_" . $row['news_id'] . "\" style=\"display: $display_news;\">
                         " .
                                 $row['news_body']
                                 . "<br>
@@ -35,17 +37,17 @@ require_once(path.'modules/news/db_news/db_news.php');
 
                             <script>
                                 $(document).ready(function() {
-                                    $('#" . $row['news_id'] . "').click(function() {
-                                            $('.invisible_" . $row['news_id'] . "').slideToggle(\"fast\");
+                                    $('#news" . $row['news_id'] . "').click(function() {
+                                            $('.invisible_news_" . $row['news_id'] . "').slideToggle(\"fast\");
                                     });
                                 });
                             </script>";
                 echo '</div>';
 
                 //visible first new and invis other
-                if ($visible){
-                    $display='none';
-                    $visible=false;
+                if ($visible_news){
+                    $display_news='none';
+                    $visible_news=false;
                 }
         }
 
@@ -53,9 +55,38 @@ require_once(path.'modules/news/db_news/db_news.php');
     }
 
     //TOTO JE BLOK PRO PRAVY SLOUPEC. CSS neni nadefinovano, ale je otagovanoo
+    $events = db_news::prepareEvents();
 
-    echo"<div class='web_news_column_right'>
-             <div class='items_under_infobar'>Zde bude kalendar s akcemi guildy a GM akcemi</div>
-        </div></div>";
+        if (!$events){
+            echo "Zádné položky k zobrazení";
+        }
+        else {
+            while ($event = $events->fetch_assoc()){
 
+                echo "<div class='web_news_column_right'>";
+                echo " <div id=\"events" . $event['event_id'] . "\"> <div class='items_under_infobar'>" . $event['event_name'] . "
+                        <div class=\"invisible_events_" . $event['event_id'] . "\" style=\"display: $display_events;\">
+                        " .
+                          $event['event_text']
+                    . "<br>
+                                </div></div></div>
+
+                            <script>
+                                $(document).ready(function() {
+                                    $('#events" . $event['event_id'] . "').click(function() {
+                                            $('.invisible_events_" . $event['event_id'] . "').slideToggle(\"fast\");
+                                    });
+                                });
+                            </script>";
+                echo '</div>';
+
+                //visible first new and invis other
+                if ($visible_events){
+                    $display_events='none';
+                    $visible_events=false;
+                }
+
+            }
+            echo "</div>";
+        }
     ?>

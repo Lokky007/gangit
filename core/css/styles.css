@@ -11,7 +11,8 @@
     margin-bottom: 25%;
     margin-top: 25%;
 }
-.hidden_access_input {
+.hidden_access_input
+.hidden_InfoBar{
     visibility: hidden;
 }
 body {
@@ -162,7 +163,7 @@ button{
 
 .items_under_infobar {
     background-color: black;
-    border: 5px none white;
+    border: 1px solid white;
     border-radius: 5px;
     margin-bottom: 10px;
    /* margin-right: 18%;*/
@@ -269,6 +270,23 @@ button{
     padding-left: 20px;
     padding-right: 40px;
     float: right;
+}
+
+.detailOfEvent{
+    text-decoration:none;
+    position:relative;
+}
+
+.detailOfEvent span{
+    width: 300px;
+    height: 300px;
+    display:none;
+}
+
+.detailOfEvent:hover span {
+    display:block;
+    position:fixed;
+    overflow:hidden;
 }
 
 
